@@ -11,7 +11,7 @@ HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
-// Forward declarations of functions included in this code module:
+                                                // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -108,17 +108,15 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    if (hWnd == 0)
       return FALSE;
-   
 
    Init_Engine(hWnd);
-
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
    return TRUE;
 }
-//------------------------------------------------------------------------------------------------------------ 
+//------------------------------------------------------------------------------------------------------------
 //
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
@@ -169,11 +167,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 
    case WM_KEYDOWN:
-      switch(wParam)
+      switch (wParam)
       {
       case VK_LEFT:
          return On_Key_Down(EKT_Left);
-         
+
       case VK_RIGHT:
          return On_Key_Down(EKT_Right);
 
@@ -182,8 +180,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
       }
       break;
 
+
    case WM_TIMER:
-      if (wParam == WM_USER + Timer_ID)
+      if (wParam == Timer_ID)
          return On_Timer();
       break;
 
