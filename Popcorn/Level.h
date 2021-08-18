@@ -3,14 +3,7 @@
 #include "Config.h"
 #include "Active_Brick.h"
 
-//------------------------------------------------------------------------------------------------------------
-enum EBrick_Type
-{
-	EBT_None,
-	EBT_Red,
-	EBT_Blue
-};
-//------------------------------------------------------------------------------------------------------------
+
 enum ELetter_Type
 {
 	ELT_None,
@@ -29,12 +22,10 @@ public:
 
 	AActive_Brick Active_Brick;
 
-
 private:
 	void Draw_Brick(HDC hdc, int x, int y, EBrick_Type brick_type);
 	void Set_Brick_Letter_Colors(bool is_switch_color, HPEN &front_pen, HBRUSH &front_brush, HPEN &back_pen, HBRUSH &back_brush);
 	void Draw_Brick_Letter(HDC hdc, int x, int y, EBrick_Type brick_type, ELetter_Type letter_type, int rotation_step);
-
 
 
 	HPEN  Brick_Red_Pen, Brick_Blue_Pen, Letter_Pen;
@@ -43,5 +34,4 @@ private:
 
 		
 	static char Level_01[AsConfig::Level_Height][AsConfig::Level_Width];
-
 };
