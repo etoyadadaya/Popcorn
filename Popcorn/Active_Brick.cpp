@@ -51,7 +51,7 @@ void AActive_Brick::Draw(HDC hdc, RECT &paint_area)
 }
 //------------------------------------------------------------------------------------------------------------
 
-void AActive_Brick::SetupColors()
+void AActive_Brick::Setup_Colors()
 {
 	int i;
 	

@@ -4,8 +4,7 @@
 //AsBorder
 //------------------------------------------------------------------------------------------------------------
 AsBorder::AsBorder()
-:Ball_Pen(0), Border_Blue_Pen(0), Border_White_Pen(0),
-Ball_Brush(0), Border_Blue_Brush(0), Border_White_Brush(0)
+:	Border_Blue_Pen(0), Border_White_Pen(0), Border_Blue_Brush(0), Border_White_Brush(0)
 {
 }
 //------------------------------------------------------------------------------------------------------------
@@ -16,27 +15,27 @@ void AsBorder::Init()
 }
 //------------------------------------------------------------------------------------------------------------	
 void AsBorder::Draw(HDC hdc, RECT &paint_areah)
-{// Ðèñóåò ðàìêó óðîâíÿ
+{// Рисует рамку уровня
 
 	int i;
 
-	// 1. Ëèíèÿ ñëåâà
+	// 1. Линия слева
 	for (i = 0; i < 50; i++)
 		Draw_Element(hdc, 2, 1 + i * 4, false);
 
-	// 2. Ëèíèÿ ñïðàâà
+	// 2. Линия справа
 	for (i = 0; i < 50; i++)
 		Draw_Element(hdc, 201, 1 + i * 4, false);
 
-	// 3. Ëèíèÿ ñâåðõó
+	// 3. Линия сверху
 	for (i = 0; i < 50; i++)
 		Draw_Element(hdc, 3 + i * 4, 0, true);
 }
 //------------------------------------------------------------------------------------------------------------
 void AsBorder::Draw_Element(HDC hdc, int x, int y, bool top_border)
-{// Ðèñóåò ýëåìåíò ðàìêè óðîâíÿ
+{// Рисует элемент рамки уровня
 
- // Îñíîâíàÿ ëèíèÿ
+ // Основная линия
 	SelectObject(hdc, Border_Blue_Pen);
 	SelectObject(hdc, Border_Blue_Brush);
 
@@ -45,7 +44,7 @@ void AsBorder::Draw_Element(HDC hdc, int x, int y, bool top_border)
 	else
 		Rectangle(hdc, (x + 1) * AsConfig::Global_Scale, y * AsConfig::Global_Scale, (x + 4) * AsConfig::Global_Scale, (y + 4) * AsConfig::Global_Scale);
 
-	// Áåëàÿ êàéìà
+	// Белая кайма
 	SelectObject(hdc, Border_White_Pen);
 	SelectObject(hdc, Border_White_Brush);
 
@@ -54,7 +53,7 @@ void AsBorder::Draw_Element(HDC hdc, int x, int y, bool top_border)
 	else
 		Rectangle(hdc, x * AsConfig::Global_Scale, y * AsConfig::Global_Scale, (x + 1) * AsConfig::Global_Scale, (y + 4) * AsConfig::Global_Scale);
 
-	// Ïåðôîðàöèÿ
+	// Перфорация
 	SelectObject(hdc, AsConfig::BG_Pen);
 	SelectObject(hdc, AsConfig::BG_Brush);
 

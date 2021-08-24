@@ -14,7 +14,7 @@ public:
 private:
 	void Draw_Element(HDC hdc, int x, int y, bool top_border);
 
-	HPEN Ball_Pen, Border_Blue_Pen, Border_White_Pen;
-	HBRUSH Ball_Brush, Border_Blue_Brush, Border_White_Brush;
+	HPEN Border_Blue_Pen, Border_White_Pen;
+	HBRUSH Border_Blue_Brush, Border_White_Brush;
 };
 //------------------------------------------------------------------------------------------------------------

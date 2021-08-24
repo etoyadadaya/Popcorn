@@ -24,7 +24,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR lpCmd
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	// TODO: Place code here.
-	AsConfig::SetupColors();
+	AsConfig::Setup_Colors();
 
 	// Initialize global strings
 	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -128,7 +128,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	int wmId;
 	HDC hdc;
-
+	PAINTSTRUCT ps;
 	switch (message)
 	{
 	case WM_COMMAND:
@@ -149,13 +149,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 
 	case WM_PAINT:
-	{
-		PAINTSTRUCT ps;
 		hdc = BeginPaint(hWnd, &ps);
 		// TODO: Add any drawing code that uses hdc here...
 		Engine.Draw_Frame(hdc, ps.rcPaint);
 		EndPaint(hWnd, &ps);
-	}
 	break;
 
 
@@ -186,7 +183,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 
 	default:
-		return DefWindowProc(hWnd, message, wParam, lParam);
+			return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 	return 0;
 }

@@ -18,7 +18,7 @@ public:
 	void Act(HWND hwnd);
 	void Draw(HDC hdc, RECT &paint_area);
 
-	static void SetupColors();
+	static void Setup_Colors();
 
 private:
 	EBrick_Type Brick_Type;

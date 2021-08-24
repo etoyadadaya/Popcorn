@@ -9,11 +9,11 @@ AsEngine::AsEngine()
 }
 //------------------------------------------------------------------------------------------------------------
 void AsEngine::Init_Engine(HWND hwnd)
-{// Íàñòðîéêà èãðû ïðè ñòàðòå
+{// Настройка игры при старте
 
 	Hwnd = hwnd;
 	
-	AActive_Brick::SetupColors();  
+	AActive_Brick::Setup_Colors();  
 
 	Ball.Init();
 	Level.Init();
@@ -26,7 +26,7 @@ void AsEngine::Init_Engine(HWND hwnd)
 }
 //------------------------------------------------------------------------------------------------------------
 void AsEngine::Draw_Frame(HDC hdc, RECT &paint_area)
-{// Îòðèñîâêà ýêðàíà èãðû
+{// Отрисовка экрана игры
 
 		Level.Draw(Hwnd, hdc, paint_area);
 		Platform.Draw(hdc, paint_area);
@@ -75,9 +75,13 @@ int AsEngine::On_Key_Down(EKey_Type key_type)
 //------------------------------------------------------------------------------------------------------------
 int AsEngine::On_Timer()
 {
+	++AsConfig::Current_Timer_Tick;
+
 	Ball.Move(Hwnd, &Level, Platform.X_Pos, Platform.Width);
 
 	Level.Active_Brick.Act(Hwnd);
+
+	Platform.Act(Hwnd);
 
 	return 0;
 }

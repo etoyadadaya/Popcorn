@@ -19,13 +19,13 @@ void ABall::Draw(HDC hdc, RECT &paint_area)
 	if (! IntersectRect(&intersection_rect, &paint_area, &Ball_Rect) )
 		return;
 
-	// 1. Î÷èùàåì ôîí 
+	// 1. Очищаем фон 
 	SelectObject(hdc, AsConfig::BG_Pen);
 	SelectObject(hdc, AsConfig::BG_Brush);
 
 	Ellipse(hdc, Prev_Ball_Rect.left, Prev_Ball_Rect.top, Prev_Ball_Rect.right - 1, Prev_Ball_Rect.bottom - 1);
 
-	// 2. Ðèñóåì øàðèê
+	// 2. Рисуем шарик
 	SelectObject(hdc, Ball_Pen);
 	SelectObject(hdc, Ball_Brush);
 
@@ -43,7 +43,7 @@ void ABall::Move(HWND hwnd, ALevel *level, int platform_x_pos, int platform_widt
 	next_x_pos = Ball_X_Pos + (int)(Ball_Speed * cos(Ball_Direction) );
 	next_y_pos = Ball_Y_Pos - (int)(Ball_Speed * sin(Ball_Direction) );
 
-	// Êîððåêòèðóåì ïîçèöèþ ïðè îòðàæåíèè îò ðàìêè
+	// Корректируем позицию при отражении от рамки
 	if (next_x_pos < AsConfig::Border_X_Offset)
 	{
 		next_x_pos = AsConfig::Level_X_Offset - (next_x_pos - AsConfig::Level_X_Offset);
@@ -68,7 +68,7 @@ void ABall::Move(HWND hwnd, ALevel *level, int platform_x_pos, int platform_widt
 		Ball_Direction = M_PI + (M_PI - Ball_Direction);
 	}
 
-	// Êîððåêòèðóåì ïîçèöèþ ïðè îòðàæåíèè îò ïëàòôîðìû
+	// Корректируем позицию при отражении от платформы
 	if (next_y_pos > platform_y_pos)
 	{
 		if (next_x_pos >= platform_x_pos && next_x_pos <= platform_x_pos + platform_width)
@@ -78,10 +78,10 @@ void ABall::Move(HWND hwnd, ALevel *level, int platform_x_pos, int platform_widt
 		}
 	}
 
-	// Êîððåêòèðóåì ïîçèöèþ ïðè îòðàæåíèè îò êèðïè÷åé
+	// Корректируем позицию при отражении от кирпичей
 	level->Check_Level_Brick_Hit(next_y_pos, Ball_Direction);
 
-	// Ñìåùàåì øàðèê
+	// Смещаем шарик
 	Ball_X_Pos = next_x_pos;
 	Ball_Y_Pos = next_y_pos;
 
@@ -93,3 +93,4 @@ void ABall::Move(HWND hwnd, ALevel *level, int platform_x_pos, int platform_widt
 	InvalidateRect(hwnd, &Prev_Ball_Rect, FALSE);
 	InvalidateRect(hwnd, &Ball_Rect, FALSE);
 }
+//------------------------------------------------------------------------------------------------------------

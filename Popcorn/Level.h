@@ -3,7 +3,7 @@
 #include "Config.h"
 #include "Active_Brick.h"
 
-
+//------------------------------------------------------------------------------------------------------------
 enum ELetter_Type
 {
 	ELT_None,
@@ -28,10 +28,9 @@ private:
 	void Draw_Brick_Letter(HDC hdc, int x, int y, EBrick_Type brick_type, ELetter_Type letter_type, int rotation_step);
 
 
-	HPEN  Brick_Red_Pen, Brick_Blue_Pen, Letter_Pen;
+	HPEN Brick_Red_Pen, Brick_Blue_Pen, Letter_Pen;
 	HBRUSH Brick_Red_Brush, Brick_Blue_Brush;
-	RECT Level_Rect;
-
-		
+	RECT Level_Rect;		
 	static char Level_01[AsConfig::Level_Height][AsConfig::Level_Width];
 };
+//------------------------------------------------------------------------------------------------------------
