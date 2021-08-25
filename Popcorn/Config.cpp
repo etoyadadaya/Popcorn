@@ -19,6 +19,7 @@ const AColor AsConfig::Blue_Brick_Color(85, 255, 255);
 
 HPEN AsConfig::BG_Pen;
 HBRUSH AsConfig::BG_Brush;
+HWND AsConfig::Hwnd;
 //------------------------------------------------------------------------------------------------------------
 void AsConfig::Setup_Colors()
 {
