@@ -13,9 +13,9 @@ bool AsPlatform::Check_Hit(double next_x_pos, double next_y_pos, ABall *ball)
 {
 	if (next_y_pos + ball->Radius > AsConfig::Platform_Y_Pos)
 	{
-		if (next_x_pos + ball->Radius >= X_Pos && next_x_pos - ball->Radius <= (double)(X_Pos + Width) )
+		if (next_x_pos + ball->Radius >= X_Pos && next_x_pos - ball->Radius <= X_Pos + Width )
 		{
-			ball->Ball_Direction = M_PI + (M_PI - ball->Ball_Direction);
+			ball->Reflect(true);
 			return true;
 		}
 	}
@@ -61,14 +61,12 @@ void AsPlatform::Set_State(EPlatform_State new_state)
 
 		for (i = 0; i < len; i++)
 			Meltdown_Platform_Y_Pos[i] = Platform_Rect.bottom;
-
 		break;
 
 
 	case EPS_Roll_In:
 		X_Pos = AsConfig::Max_X_Pos - 1;
 		Rolling_Step = Max_Rolling_Step - 1;
-
 		break;
 	}
 
@@ -221,7 +219,7 @@ void AsPlatform::Draw_Meltdown_State(HDC hdc, RECT &paint_area)
 }
 //------------------------------------------------------------------------------------------------------------
 void AsPlatform::Draw_Roll_In_State(HDC hdc, RECT &paint_area)
-{// рисуем выкатывающуюся платформу 
+{// Рисуем выкатывающуюся платформу 
 
 	int x = X_Pos * AsConfig::Global_Scale;
 	int y = AsConfig::Platform_Y_Pos * AsConfig::Global_Scale;
@@ -229,7 +227,7 @@ void AsPlatform::Draw_Roll_In_State(HDC hdc, RECT &paint_area)
 	double alpha;
 	XFORM xform, old_xform;	
 
-	AsPlatform::Clear_BG(hdc);
+	Clear_BG(hdc);
 
 	// 1. шарик
 	SelectObject(hdc, Platform_Circle_Pen);
@@ -237,7 +235,7 @@ void AsPlatform::Draw_Roll_In_State(HDC hdc, RECT &paint_area)
 
 	Ellipse(hdc, x , y , x + roller_size, y + roller_size);
 
-	// 2. Резделительная линия
+	// 2. Разделительная линия
 	SetGraphicsMode(hdc, GM_ADVANCED);
 
 	alpha = -2.0 * M_PI / (double)Max_Rolling_Step * (double)Rolling_Step;

@@ -31,7 +31,6 @@ public:
 	int Width;
 	int X_Step;
 	
-
 private:
 	void Clear_BG(HDC hdc);
 	void Draw_Circle_Highlight(HDC hdc, int x, int y);
